@@ -5,6 +5,10 @@ from app.db import engine, Base
 # ★ モデルをimportしないとテーブルが登録されない
 from app.models.patient import Patient  # noqa
 
+# ★ ルーター追加
+from app.api import patient
+
+
 app = FastAPI(title="EMR API")
 
 @app.on_event("startup")
@@ -18,3 +22,8 @@ async def startup():
 @app.get("/")
 def root():
     return {"message": "EMR backend is running"}
+
+# =========================
+#  APIルーター登録
+# =========================
+app.include_router(patient.router)
