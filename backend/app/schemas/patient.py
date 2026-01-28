@@ -1,5 +1,7 @@
 from datetime import date
-from pydantic import BaseModel
+from uuid import UUID
+from pydantic import BaseModel, ConfigDict
+
 
 class PatientCreate(BaseModel):
     last_name: str
@@ -7,12 +9,12 @@ class PatientCreate(BaseModel):
     birth_date: date
     gender: str | None = None
 
+
 class PatientResponse(BaseModel):
-    id: int
+    id: UUID
     last_name: str
     first_name: str
     birth_date: date
     gender: str | None = None
 
-    class Config:
-        from_attributes = True  # SQLAlchemy → Pydantic 変換用
+    model_config = ConfigDict(from_attributes=True)

@@ -14,6 +14,7 @@ app = FastAPI(title="EMR API")
 @app.on_event("startup")
 async def startup():
     async with engine.begin() as conn:
+        await conn.execute(text("CREATE EXTENSION IF NOT EXISTS pgcrypto;"))  # ←追加
         await conn.run_sync(Base.metadata.create_all)  # テーブル作成
         await conn.execute(text("SELECT 1"))
     print("✅ Database connected & tables created")
