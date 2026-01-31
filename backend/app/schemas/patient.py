@@ -18,3 +18,10 @@ class PatientResponse(BaseModel):
     gender: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
+
+class PatientUpdate(BaseModel):
+    last_name: str | None = None
+    first_name: str | None = None
+    birth_date: date | None = None
+    gender: str | None = None
+
