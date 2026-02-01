@@ -4,6 +4,8 @@ from app.db import engine, Base
 
 # ★ モデルをimportしないとテーブルが登録されない
 from app.models.patient import Patient  # noqa
+from app.models import encounter
+
 
 # ★ ルーター追加
 from app.api import patient

@@ -2,7 +2,7 @@ import uuid
 from datetime import date
 from sqlalchemy import String, Date
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db import Base
 
 
@@ -20,3 +20,8 @@ class Patient(Base):
     first_name: Mapped[str] = mapped_column(String(50), nullable=False)
     birth_date: Mapped[date] = mapped_column(Date, nullable=False)
     gender: Mapped[str | None] = mapped_column(String(10), nullable=True)
+
+    encounters = relationship(
+        "Encounter",
+        back_populates="patient"
+    )
